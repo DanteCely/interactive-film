@@ -4,14 +4,16 @@ import { Button, Timer } from "../";
 const namespace = 'interactive';
 
 export const Interactive = (props) => {
-  const { countDown } = props;
+  const { countDown, options, defaultOption } = props;
+  const onCountdownEnd = () => {
+    document.getElementById(options[defaultOption].id).click();
+  }
 
   return (
     <section className={namespace}>
-      <Timer countDown={countDown} />
+      <Timer countDown={countDown} onCountdownEnd={onCountdownEnd} />
       <article className={`${namespace}__options`}>
-        <Button>Consectetur adipisicing elit.</Button>
-        <Button>Inventore veritatis exercitationem </Button>
+        {options.map((option) => <Button key={option.id} id={option.id} text={option.text} />)}
       </article>
     </section>
   );

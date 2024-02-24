@@ -1,0 +1,74 @@
+{
+  "name": "Movie Film",
+  "author": "Jhon Doe",
+  "script": [
+    {
+      "type": "scene",
+      "id": "scene_1",
+      "sources": [
+        {
+          "src": "https://my-cloud.123456789sasdf.mp4",
+          "type": "video/mp4"
+        }
+      ],
+      "start_at": 5,
+      "defaul_option": 1,
+      "options": [
+        {
+          "id": "option_1",
+          "text": "Option 1",
+          "next": "scene_2"
+        },
+        {
+          "id": "option_2",
+          "text": "Option 2",
+          "next": "scene_3"
+        }
+      ]
+    },
+    {
+      "type": "scene",
+      "id": "scene_2",
+      "sources": [
+        {
+          "src": "https://my-cloud.123456789sasdf.mp4",
+          "type": "video/mp4"
+        }
+      ],
+      "start_at": 10,
+      "defaul_option": true,
+      "options": [
+        {
+          "id": "option_1",
+          "text": "Option 1",
+          "next": "scene_5"
+        },
+        {
+          "id": "option_2",
+          "text": "Option 2",
+          "next": "scene_6"
+        }
+      ]
+    },
+    {
+      "type": "closing_scene",
+      "id": "scene_5",
+      "sources": [
+        {
+          "src": "https://my-cloud.123456789sasdf.mp4",
+          "type": "video/mp4"
+        }
+      ]
+    },
+    {
+      "type": "closing_scene",
+      "id": "scene_5",
+      "sources": [
+        {
+          "src": "https://my-cloud.123456789sasdf.mp4",
+          "type": "video/mp4"
+        }
+      ]
+    }
+  ]
+}

@@ -18,4 +18,8 @@
     border-color: darken($primary-border, 20%);
     color: darken($primary-text, 20%)
   }
+
+  &--visited {
+    background-color: red; // TODO:
+  }
 }

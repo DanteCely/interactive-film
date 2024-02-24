@@ -12,7 +12,7 @@ const options = {
 
 
 export const Player = (props) => {
-  const { src, onCurrentTime } = props;
+  const { sources, onCurrentTime, onEnded } = props;
 
   const onTimeUpdate = (event) => {
     if (typeof onCurrentTime === 'function') onCurrentTime(event?.target || {});
@@ -20,7 +20,11 @@ export const Player = (props) => {
 
   return (
     <>
-      <video src={src} {...options} onTimeUpdate={onTimeUpdate}></video>
+      <video onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...options}>
+        {sources.map((source) => {
+          return <source key={source.src} src={source.src} type={source.type} />
+        })}
+      </video>
     </>
   )
 }
