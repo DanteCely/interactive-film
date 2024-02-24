@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Icon } from '../';
+import clsx from 'clsx';
+
+const namespace = 'button';
 
 export const Button = (props) => {
   const { text, icon, children, ...rest } = props;
 
   return (
-    <button {...rest}>
+    <button className={clsx(namespace)} {...rest}>
       {children ||
         <>
           {icon && <Icon>{icon}</Icon>}

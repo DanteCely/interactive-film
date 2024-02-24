@@ -1,0 +1,39 @@
+// _palette.scss
+
+// Escala de Grises
+$white: #ffffff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000000;
+
+// Colores Primarios
+$primary-color: #f44336;
+$primary-text: #ffffff;
+$primary-border: darken($primary-color, 20%);
+
+// Colores Secundarios
+$secondary-color: #4caf50;
+$secondary-text: #ffffff;
+$secondary-border: darken($secondary-color, 20%);
+
+// Colores de Acento
+$accent-color: #ff9800;
+$accent-text: #000000;
+$accent-border: darken($accent-color, 10%);
+
+// Estados
+$success-color: #28a745;
+$info-color: #17a2b8;
+$warning-color: #ffc107;
+$error-color: #dc3545;
+
+// Background Claro y Oscuro
+$light-background: #f8f9fa;
+$dark-background: #343a40;

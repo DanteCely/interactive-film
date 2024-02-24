@@ -1,0 +1,25 @@
+.button {
+  background-color: $primary-color;
+  color: $primary-text;
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  border-radius: 50px;
+  margin: 1rem;
+  border: 2px solid $primary-border;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: $box-shadow;
+  }
+
+  &:active {
+    background-color: darken($primary-color, 10%);
+    box-shadow: none;
+  }
+
+
+
+   &__primary {
+
+   }
+}
