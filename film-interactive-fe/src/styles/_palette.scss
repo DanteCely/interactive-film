@@ -14,19 +14,14 @@ $gray-900: #212529;
 $black: #000000;
 
 // Colores Primarios
-$primary-color: #f44336;
-$primary-text: #ffffff;
-$primary-border: darken($primary-color, 20%);
+$primary-color: #03121b;
+$primary-text: $gray-200;
+$primary-border: lighten($primary-color, 20%);
+$primary-color-transparent: transparentize($primary-color, 0.75);
 
 // Colores Secundarios
-$secondary-color: #4caf50;
-$secondary-text: #ffffff;
-$secondary-border: darken($secondary-color, 20%);
 
 // Colores de Acento
-$accent-color: #ff9800;
-$accent-text: #000000;
-$accent-border: darken($accent-color, 10%);
 
 // Estados
 $success-color: #28a745;
@@ -35,5 +30,6 @@ $warning-color: #ffc107;
 $error-color: #dc3545;
 
 // Background Claro y Oscuro
-$light-background: #f8f9fa;
-$dark-background: #343a40;
+$background-light: $gray-100;
+$background-dark: $gray-900;
+$background-dark-transparent: transparentize($background-dark, 0.75);

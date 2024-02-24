@@ -1,5 +1,6 @@
 
 /* eslint-disable react/prop-types */
+
 const options = {
   controls: true,
   playsInline: false,
@@ -11,11 +12,15 @@ const options = {
 
 
 export const Player = (props) => {
-  const { src } = props;
+  const { src, onCurrentTime } = props;
+
+  const onTimeUpdate = (event) => {
+    if (typeof onCurrentTime === 'function') onCurrentTime(event?.target || {});
+  }
 
   return (
     <>
-      <video src={src} {...options}></video>
+      <video src={src} {...options} onTimeUpdate={onTimeUpdate}></video>
     </>
   )
 }

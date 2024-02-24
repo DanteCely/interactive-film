@@ -1,0 +1,12 @@
+.interactive {
+  width: 100%;
+  background-color: $background-dark-transparent;
+  bottom: 5rem;
+
+  &__options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

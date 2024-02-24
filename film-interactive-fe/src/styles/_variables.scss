@@ -8,4 +8,5 @@
   'opsz' 24
 }
 
-$box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+$box-shadow: 0 0 5px 0 transparentize($black, 0.5);
+$box-shadow-lighten: 0 0 10px 0 transparentize($white, 0.5);
