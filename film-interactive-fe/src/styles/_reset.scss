@@ -1,5 +1,9 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/reseter.css/2.0.0/reseter.min.css';
 
+* {
+  font-size: large;
+}
+
 body {
   @extend .roboto-regular;
   background-color: $black;

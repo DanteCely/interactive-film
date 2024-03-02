@@ -1,6 +1,6 @@
 .button {
   background-color: $primary-color;
-  color: $primary-text;
+  color: $primary-text-light;
   padding-block: 1rem;
   padding-inline: 2rem;
   border-radius: 50px;
@@ -16,10 +16,12 @@
     background-color: darken($primary-color, 10%);
     box-shadow: none;
     border-color: darken($primary-border, 20%);
-    color: darken($primary-text, 20%)
+    color: darken($primary-text-light, 20%)
   }
 
   &--visited {
-    background-color: red; // TODO:
+    background-color: lighten($primary-color, 75%);
+    color: $primary-text-dark;
+    box-shadow: $box-shadow-lighten;
   }
 }

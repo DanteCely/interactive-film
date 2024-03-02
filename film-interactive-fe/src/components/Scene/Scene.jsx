@@ -3,31 +3,26 @@ import { Player, Interactive } from '../'
 import { useState } from 'react';
 
 const namespace = 'scene';
+const ANIMATION_TIME = 5;
 
 export const Scene = (props) => {
-  const { defaultOption, options, startAt, sources } = props;
+  const { defaultOption, options, decisionTime, sources } = props;
 
-  const [ready, setReady] = useState();
-  const [once, setOnce] = useState(false);
+  const [countDown, setCountDown] = useState();
 
   const onEnded = () => {
-    setReady(null);
-    setOnce(false);
+    setCountDown(undefined)
   }
 
   const onCurrentTime = ({ currentTime, duration }) => {
-    const restTime = duration - currentTime;
-    if (!once && restTime < startAt) {
-      setReady(Math.floor(restTime));
-      setOnce(true);
-    } else if (once && restTime > startAt) {
-      setReady(null);
-      setOnce(false);
-    }
+    const restTime = Math.round(duration - currentTime);
+
+    if (restTime <= decisionTime && currentTime <= duration - ANIMATION_TIME) setCountDown(restTime);
+    else setCountDown(undefined);
   }
 
   return <main className={namespace}>
     <Player sources={sources} onCurrentTime={onCurrentTime} onEnded={onEnded} />
-    {ready && <Interactive countDown={ready} defaultOption={defaultOption} options={options} />}
+    <Interactive total={decisionTime} currentTime={countDown} defaultOption={defaultOption} options={options} />
   </main>
 }

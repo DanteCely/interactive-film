@@ -1,30 +1,22 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
+import clsx from 'clsx';
 
 const namespace = 'timer';
 
-export const Timer = ({ countDown, onCountdownEnd }) => {
-  const [timer, setTimer] = useState(countDown);
-  const width = `${(timer / countDown) * 100}%`;
+export const Timer = ({ total, currentTime, onCountdownEnd }) => {
+
+  const percent = useMemo(() => currentTime ? (currentTime / total) * 100 : 0, [currentTime, total]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (timer > 0) {
-        setTimer(prevTimer => prevTimer - 1);
-      } else {
-        clearInterval(interval);
-        if (typeof onCountdownEnd === 'function') {
-          onCountdownEnd();
-        }
-      }
-    }, 1000);
+    if (percent === 0) onCountdownEnd();
+  }, [currentTime, onCountdownEnd, percent, total]);
 
-    return () => clearInterval(interval);
-  }, [timer, onCountdownEnd]);
+  const classname = clsx(namespace, { [`${namespace}--hidden`]: !currentTime });
 
   return (
-    <div className={namespace} style={{ width }}>
-      <span className="visually-hidden"> about our mobile plans</span>
+    <div className={classname} style={{ width: `${percent}%` }}>
+      <span className="visually-hidden">{currentTime}</span>
     </div>
   );
 }

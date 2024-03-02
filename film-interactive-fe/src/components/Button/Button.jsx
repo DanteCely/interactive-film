@@ -5,10 +5,10 @@ import clsx from 'clsx';
 const namespace = 'button';
 
 export const Button = (props) => {
-  const { text, icon, children, ...rest } = props;
+  const { text, icon, children, className, ...rest } = props;
 
   return (
-    <button className={clsx(namespace)} {...rest}>
+    <button className={clsx(namespace, className)} {...rest}>
       {children ||
         <>
           {icon && <Icon>{icon}</Icon>}

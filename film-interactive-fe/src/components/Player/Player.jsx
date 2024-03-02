@@ -22,7 +22,7 @@ export const Player = (props) => {
     <>
       <video onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...options}>
         {sources.map((source) => {
-          return <source key={source.src} src={source.src} type={source.type} />
+          return <source key={source.src} {...source} />
         })}
       </video>
     </>

@@ -15,7 +15,8 @@ $black: #000000;
 
 // Colores Primarios
 $primary-color: #03121b;
-$primary-text: $gray-200;
+$primary-text-light: $gray-200;
+$primary-text-dark: $gray-900;
 $primary-border: lighten($primary-color, 20%);
 $primary-color-transparent: transparentize($primary-color, 0.75);
 
