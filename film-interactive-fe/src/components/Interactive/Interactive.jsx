@@ -15,7 +15,7 @@ export const Interactive = (props) => {
     if (!hasChosen) {
       const option = options[defaultOption];
 
-      document.getElementById(chosenOption.id).click();
+      document.getElementById(option.id).click();
       onChosenNextScene(option.next);
     }
   }
