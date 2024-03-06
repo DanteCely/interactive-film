@@ -4,17 +4,17 @@ import { useState, useMemo } from 'react';
 import { useScene } from '../../contexts/SceneManager';
 
 const namespace = 'scene';
-const ANIMATION_TIME = 5;
+
 const TYPE = {
   scene: 'scene',
   closing_scene: 'closing_scene'
 }
 
 export const Scene = (props) => {
-  const { type, defaultOption, options, decisionTime, sources } = props;
+  const { type, defaultOption, options, decisionTime, sources, animationTime } = props;
 
   const { goToNextScene } = useScene();
-  const totalTime = useMemo(() => decisionTime + ANIMATION_TIME, [decisionTime]);
+  const totalTime = useMemo(() => decisionTime + animationTime, [decisionTime]);
   const [countDown, setCountDown] = useState();
 
   const onEnded = () => {
@@ -23,7 +23,7 @@ export const Scene = (props) => {
   }
 
   const onCurrentTime = ({ currentTime, duration }) => {
-    const restTime = Math.round(duration - currentTime) - ANIMATION_TIME;
+    const restTime = Math.round(duration - currentTime) - animationTime;
 
     if (restTime >= 0 && restTime <= totalTime && currentTime <= duration) setCountDown(restTime);
     else setCountDown(undefined);
