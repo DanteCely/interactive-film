@@ -9,7 +9,7 @@ export const Timer = ({ total, currentTime, onCountDownEnd }) => {
   const percent = useMemo(() => currentTime ? (currentTime / total) * 100 : 0, [currentTime, total]);
 
   useEffect(() => {
-    if (percent === 0) onCountDownEnd();
+    if (percent <= 0) onCountDownEnd();
   }, [currentTime, onCountDownEnd, percent, total]);
 
   const classname = clsx(namespace, { [`${namespace}--hidden`]: !currentTime });

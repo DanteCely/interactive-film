@@ -1,6 +1,8 @@
 
 /* eslint-disable react/prop-types */
 
+import { useEffect, useRef } from "react";
+
 const options = {
   controls: true,
   playsInline: false,
@@ -12,17 +14,21 @@ const options = {
 
 
 export const Player = (props) => {
-  const { sources, onCurrentTime, onEnded } = props;
+  const { sources = [], onCurrentTime, onEnded } = props;
+  const videoRef = useRef();
+
+  useEffect(() => {    
+    videoRef.current?.load();
+    videoRef.current?.play();
+  }, [sources]);
 
   const onTimeUpdate = (event) => {
     if (typeof onCurrentTime === 'function') onCurrentTime(event?.target || {});
   }
 
   return (
-    <video onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...options}>
-      {sources.map((source) => {
-        return <source key={source.src} {...source} />
-      })}
+    <video ref={videoRef} onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...options}>
+      {sources.map((source) => <source key={source.src} {...source} />)}
     </video>
   )
 }

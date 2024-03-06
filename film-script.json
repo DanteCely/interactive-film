@@ -7,21 +7,21 @@
       "id": "scene_1",
       "sources": [
         {
-          "src": "/assets/videos/video1.mp4",
+          "src": "/assets/videos/video-1.mp4",
           "type": "video/mp4"
         }
       ],
-      "decision_time": 20,
-      "default_option": 1,
+      "decisionTime": 8,
+      "defaultOption": 1,
       "options": [
         {
           "id": "option_1",
-          "text": "Escapar del Juego",
+          "text": "Ir al balcón",
           "next": "scene_2"
         },
         {
           "id": "option_2",
-          "text": "Jugar Luz Verde",
+          "text": "Pelear contra el jefe final",
           "next": "scene_3"
         }
       ]
@@ -31,7 +31,7 @@
       "id": "scene_2",
       "sources": [
         {
-          "src": "/assets/videos/video2.mp4",
+          "src": "/assets/videos/video-2.mp4",
           "type": "video/mp4"
         }
       ]
@@ -41,7 +41,7 @@
       "id": "scene_3",
       "sources": [
         {
-          "src": "/assets/videos/video3.mp4",
+          "src": "/assets/videos/video-3.mp4",
           "type": "video/mp4"
         }
       ]

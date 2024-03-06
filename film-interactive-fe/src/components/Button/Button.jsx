@@ -5,10 +5,14 @@ import clsx from 'clsx';
 const namespace = 'button';
 
 export const Button = (props) => {
-  const { text, icon, children, className, ...rest } = props;
+  const { text, icon, children, className, onClick, next, ...rest } = props;
+
+  const handleClick = (event) => {
+    onClick(next, event);
+  }
 
   return (
-    <button className={clsx(namespace, className)} {...rest}>
+    <button className={clsx(namespace, className)} onClick={handleClick} {...rest}>
       {children ||
         <>
           {icon && <Icon>{icon}</Icon>}
