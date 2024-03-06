@@ -27,7 +27,7 @@
       ]
     },
     {
-      "type": "scene",
+      "type": "closing_scene",
       "id": "scene_2",
       "sources": [
         {
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "type": "scene",
+      "type": "closing_scene",
       "id": "scene_3",
       "sources": [
         {

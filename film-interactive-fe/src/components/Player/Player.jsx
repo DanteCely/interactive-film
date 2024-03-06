@@ -19,12 +19,10 @@ export const Player = (props) => {
   }
 
   return (
-    <>
-      <video onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...options}>
-        {sources.map((source) => {
-          return <source key={source.src} {...source} />
-        })}
-      </video>
-    </>
+    <video onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...options}>
+      {sources.map((source) => {
+        return <source key={source.src} {...source} />
+      })}
+    </video>
   )
 }

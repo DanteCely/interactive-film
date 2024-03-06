@@ -4,13 +4,13 @@ import clsx from 'clsx';
 
 const namespace = 'timer';
 
-export const Timer = ({ total, currentTime, onCountdownEnd }) => {
+export const Timer = ({ total, currentTime, onCountDownEnd }) => {
 
   const percent = useMemo(() => currentTime ? (currentTime / total) * 100 : 0, [currentTime, total]);
 
   useEffect(() => {
-    if (percent === 0) onCountdownEnd();
-  }, [currentTime, onCountdownEnd, percent, total]);
+    if (percent === 0) onCountDownEnd();
+  }, [currentTime, onCountDownEnd, percent, total]);
 
   const classname = clsx(namespace, { [`${namespace}--hidden`]: !currentTime });
 

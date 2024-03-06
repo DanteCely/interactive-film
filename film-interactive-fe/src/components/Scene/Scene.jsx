@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Player, Interactive } from '../'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const namespace = 'scene';
 const ANIMATION_TIME = 5;
 
 export const Scene = (props) => {
   const { defaultOption, options, decisionTime, sources } = props;
+  const nextScene = useRef(null)
 
   const [countDown, setCountDown] = useState();
 
@@ -23,6 +24,6 @@ export const Scene = (props) => {
 
   return <main className={namespace}>
     <Player sources={sources} onCurrentTime={onCurrentTime} onEnded={onEnded} />
-    <Interactive total={decisionTime} currentTime={countDown} defaultOption={defaultOption} options={options} />
+    <Interactive onChosenNextScene={onChosenNextScene} total={decisionTime} currentTime={countDown} defaultOption={defaultOption} options={options} />
   </main>
 }

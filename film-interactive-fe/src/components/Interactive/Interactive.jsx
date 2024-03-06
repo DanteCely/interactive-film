@@ -5,9 +5,13 @@ import clsx from 'clsx';
 const namespace = 'interactive';
 
 export const Interactive = (props) => {
-  const { currentTime, options, defaultOption, total } = props;
-  const onCountdownEnd = () => {
-    document.getElementById(options[defaultOption].id).click();
+  const { currentTime, options, defaultOption, total, onChosenNextScene } = props;
+  const onCountDownEnd = () => {
+    const chosenOption = options[defaultOption];
+
+    document.getElementById(chosenOption.id).click();
+    // Cargar la siguiente escena por optimización
+    onChosenNextScene(chosenOption.next);
   }
 
   const handleClick = (event) => {
@@ -19,7 +23,7 @@ export const Interactive = (props) => {
 
   return (
     <section className={clsx(namespace, { ['interactive--hidden']: currentTime === undefined })}>
-      {currentTime !== undefined && <Timer total={total} currentTime={currentTime} onCountdownEnd={onCountdownEnd} />}
+      {currentTime !== undefined && <Timer total={total} currentTime={currentTime} onCountDownEnd={onCountDownEnd} />}
       <article className={`${namespace}__options`}>
         {options.map((option) => {
           const buttonProps = {
