@@ -16,7 +16,13 @@ export const Controls = (props) => {
     }
 
     return <section className={classnames}>
-
+        {/* TODO: Convert in button when is mobile */}
         <Icon onClick={onClick} className={`${namespace}__big-play`}>{paused ? 'play_circle' : 'pause_circle'}</Icon>
+        {/* TODO: Use as a button */}
+        <Icon onClick={onClick} className={`${namespace}__return-prev-scene`}>undo</Icon>
+        <Icon onClick={onClick} className={`${namespace}__forward`}>forward_10</Icon>
+        <Icon onClick={onClick} className={`${namespace}__replay`}>replay_10</Icon>
+
+        
     </section>;
 };

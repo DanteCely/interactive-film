@@ -15,8 +15,6 @@ export const usePlayer = (timeActive = 2500) => {
     const [paused, setPaused] = useState(true);
     const timeId = useRef();
 
-    console.log({timeId: timeId.current});
-
     const activeTempUser = (time) => {
         setIsActive(true);
         clearTimeout(timeId.current);
@@ -100,8 +98,6 @@ export const usePlayer = (timeActive = 2500) => {
         onPause,
         onClick
     }
-
-    console.log({isActive});
 
     return [state, events];
 }

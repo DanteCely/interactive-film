@@ -29,7 +29,7 @@ export const Scene = (props) => {
     else setCountDown(undefined);
   }
 
-  const playerProps = { sources, onCurrentTime, onEnded };
+  const playerProps = { sources, onCurrentTime, onEnded, hasInteractive: countDown };
   const interactiveProps = { total: totalTime, currentTime: countDown, defaultOption, options };
 
   return <main className={namespace}>

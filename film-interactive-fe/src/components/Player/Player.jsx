@@ -16,13 +16,14 @@ const options = {
 
 
 export const Player = (props) => {
-  const { sources = [], onCurrentTime, onEnded } = props;
+  const { sources = [], onCurrentTime, onEnded, hasInteractive } = props;
   const videoRef = useRef();
-  const [{paused, isActive}, events] = usePlayer();
+  const [{ paused, isActive }, events] = usePlayer();
 
   useEffect(() => {
-      videoRef.current?.load();
-      videoRef.current?.play();
+    // TODO: DOMException: play() failed because the user didn't interact with the document first.
+    videoRef.current?.load();
+    videoRef.current?.play();
   }, [sources]);
 
   const onTimeUpdate = (event) => {
@@ -34,7 +35,7 @@ export const Player = (props) => {
       <video ref={videoRef} onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...events} {...options}>
         {sources.map((source) => <source key={source.src} {...source} />)}
       </video>
-      <Controls isActive={isActive} paused={paused} />
+      <Controls isActive={!hasInteractive && isActive} paused={paused} />
     </>
   )
 }
