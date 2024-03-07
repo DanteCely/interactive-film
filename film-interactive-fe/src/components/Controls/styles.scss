@@ -1,0 +1,15 @@
+.controls {
+  color: white;
+  bottom: 5vh;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility $duration, opacity $duration linear, bottom $duration linear;
+
+  &--hidden {
+    transition: visibility $duration, opacity $duration linear, bottom $duration linear;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    bottom: 0;
+  }
+}

@@ -2,6 +2,8 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect, useRef } from "react";
+import { useActiveUser } from '../../contexts/SceneManager';
+import { Controls } from '../';
 
 const options = {
   controls: true,
@@ -17,7 +19,9 @@ export const Player = (props) => {
   const { sources = [], onCurrentTime, onEnded } = props;
   const videoRef = useRef();
 
-  useEffect(() => {    
+  const [isActive, events] = useActiveUser();
+
+  useEffect(() => {
     videoRef.current?.load();
     videoRef.current?.play();
   }, [sources]);
@@ -27,8 +31,11 @@ export const Player = (props) => {
   }
 
   return (
-    <video ref={videoRef} onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...options}>
-      {sources.map((source) => <source key={source.src} {...source} />)}
-    </video>
+    <>
+      <video ref={videoRef} onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...events} {...options}>
+        {sources.map((source) => <source key={source.src} {...source} />)}
+      </video>
+      <Controls isActive={isActive} />
+    </>
   )
 }

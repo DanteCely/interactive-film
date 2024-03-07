@@ -5,6 +5,7 @@ import { useScene } from '../../contexts/SceneManager';
 import { useState } from "react";
 
 const namespace = 'interactive';
+const namespaceHidden = `${namespace}--hidden`;
 
 export const Interactive = (props) => {
   const { currentTime, options, defaultOption, total } = props;
@@ -22,13 +23,13 @@ export const Interactive = (props) => {
 
   const onClick = (next, event) => {
     event?.currentTarget.classList.add('button--visited');
-    document.querySelector('.interactive').classList.add('interactive--hidden');
+    document.querySelector(`.${namespace}`).classList.add(namespaceHidden);
     setHasChosen(true);
     onChosenNextScene(next);
   }
  
   return (
-    <section className={clsx(namespace, { ['interactive--hidden']: currentTime === undefined })}>
+    <section className={clsx(namespace, { [namespaceHidden]: currentTime === undefined })}>
       {currentTime !== undefined && <Timer total={total} currentTime={currentTime} onCountDownEnd={onCountDownEnd} />}
       <article className={`${namespace}__options`}>
         {options.map((option) => {

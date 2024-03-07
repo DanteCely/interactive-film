@@ -1,22 +1,23 @@
 .interactive {
   background-color: $background-dark-transparent;
+  padding: 3rem;
+  width: 100%;
   bottom: 5vh;
   opacity: 1;
-  padding: 3rem;
-  transition: opacity 1s linear, bottom 1s linear;
   visibility: visible;
-  width: 100%;
+  transition: visibility $duration, opacity $duration linear, bottom $duration linear;
+
+  &--hidden {
+    transition: $delay visibility $duration, $delay opacity $duration linear, $delay bottom $duration linear;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    bottom: 0;
+  }
 
   &__options {
     display: grid;
     grid-template-columns: auto auto;
     gap: 1rem;
-  }
-
-  &--hidden {
-    visibility: hidden;
-    opacity: 0;
-    bottom: 0;
-    transition: 3s visibility 1s, 3s opacity 1s linear, 3s bottom 1s linear;
   }
 }
