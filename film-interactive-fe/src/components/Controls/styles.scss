@@ -1,15 +1,47 @@
+$delay-controls: 0.2s;
+$duration-control: 0.2s;
+
 .controls {
   color: white;
-  bottom: 5vh;
   opacity: 1;
   visibility: visible;
-  transition: visibility $duration, opacity $duration linear, bottom $duration linear;
+  transition: visibility $duration-control, opacity $duration-control linear;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 16px;
 
   &--hidden {
-    transition: visibility $duration, opacity $duration linear, bottom $duration linear;
+    transition: visibility $duration-control, opacity $duration-control linear;
     visibility: hidden;
     opacity: 0;
-    pointer-events: none;
-    bottom: 0;
+  }
+
+  &__big-play {
+    grid-area: 2 / 2 / 3 / 3;
+    justify-self: center;
+    align-self: center;
+    font-size: 8rem;
+  }
+
+  &__return-prev-scene {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+
+  &__back {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+
+  &__advance {
+    grid-area: 2 / 3 / 3 / 4;
+  }
+}
+
+.mobile {
+  .controls__big-play {
+    pointer-events: all;
   }
 }

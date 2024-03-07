@@ -21,13 +21,13 @@ export const Interactive = (props) => {
     }
   }
 
-  const onClick = (next, event) => {
+  const onClick = (event, { next }) => {
     event?.currentTarget.classList.add('button--visited');
     document.querySelector(`.${namespace}`).classList.add(namespaceHidden);
     setHasChosen(true);
     onChosenNextScene(next);
   }
- 
+
   return (
     <section className={clsx(namespace, { [namespaceHidden]: currentTime === undefined })}>
       {currentTime !== undefined && <Timer total={total} currentTime={currentTime} onCountDownEnd={onCountDownEnd} />}

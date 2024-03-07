@@ -5,10 +5,10 @@ import clsx from 'clsx';
 const namespace = 'button';
 
 export const Button = (props) => {
-  const { text, icon, children, className, onClick, next, ...rest } = props;
+  const { text, icon, children, className, onClick, ...rest } = props;
 
   const handleClick = (event) => {
-    onClick(next, event);
+    onClick(event, rest);
   }
 
   return (

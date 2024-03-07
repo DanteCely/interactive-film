@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
+import clsx from "clsx";
+
+const namespace = "material-symbols-outlined";
+
 export const Icon = (props) => {
-  const { name, children } = props;
+  const { name, className, children, onClick } = props;
+
   return (
-    <span className="material-symbols-outlined">
+    <span className={clsx(namespace, className)} onClick={onClick}>
       {name || children}
     </span>
   )
