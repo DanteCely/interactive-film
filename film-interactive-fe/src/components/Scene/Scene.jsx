@@ -2,22 +2,25 @@
 import { Player, Interactive } from '../'
 import { useState, useMemo } from 'react';
 import { useScene } from '../../contexts/SceneManager';
+import { TYPE, SKIP_SEC } from '../../constants';
 
 const namespace = 'scene';
 
-const TYPE = {
-  scene: 'scene',
-  closing_scene: 'closing_scene'
-}
-
 export const Scene = (props) => {
-  const { type, defaultOption, options: _options, prevOptions: _prevOptions, decisionTime, sources, animationTime } = props;
+  const {
+    type,
+    defaultOption,
+    options: _options,
+    prevOptions: _prevOptions,
+    decisionTime,
+    sources,
+    delay,
+  } = props;
 
   const { goToNextScene, getObjectList } = useScene();
-  const totalTime = useMemo(() => decisionTime + animationTime, [decisionTime]);
   const [countDown, setCountDown] = useState();
-  const options = useMemo(() => getObjectList(_options, 'options'),[_options]);
-  const prevOptions = useMemo(() => getObjectList(_prevOptions, 'prevOptions'),[_prevOptions]);
+  const options = useMemo(() => getObjectList(_options, TYPE.options), [_options]);
+  const prevOptions = useMemo(() => getObjectList(_prevOptions, TYPE.prev_options), [_prevOptions]);
 
   const onEnded = () => {
     setCountDown(undefined);
@@ -25,17 +28,22 @@ export const Scene = (props) => {
   }
 
   const onCurrentTime = ({ currentTime, duration }) => {
-    const restTime = Math.round(duration - currentTime) - animationTime;
+    const _countDown = Math.round(duration - currentTime);
+    const startTime = decisionTime + delay;
 
-    if (restTime >= 0 && restTime <= totalTime && currentTime <= duration) setCountDown(restTime);
-    else setCountDown(undefined);
+    if (_countDown <= startTime && _countDown >= delay) setCountDown(_countDown - delay);
   }
 
-  const playerProps = { sources, onCurrentTime, onEnded, hasInteractive: countDown };
-  const interactiveProps = { total: totalTime, currentTime: countDown, defaultOption, options };
+  const playerProps = {
+    sources,
+    onCurrentTime,
+    onEnded,
+    hiddenControls: typeof countDown === 'number',
+  };
+  const interactiveProps = { total: decisionTime, currentTime: countDown, defaultOption, options };
 
   return <main className={namespace}>
     <Player {...playerProps} />
-    {type === TYPE.scene && <Interactive {...interactiveProps} />}
+    <Interactive {...interactiveProps} />
   </main>
 }

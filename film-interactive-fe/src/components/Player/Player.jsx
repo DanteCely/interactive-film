@@ -14,11 +14,19 @@ const options = {
   preload: 'auto',
 }
 
+const namespace = 'player';
 
 export const Player = (props) => {
-  const { sources = [], onCurrentTime, onEnded, hasInteractive } = props;
+  const { sources = [], onCurrentTime, onEnded, hiddenControls } = props;
   const videoRef = useRef();
   const [{ paused, isActive }, events] = usePlayer();
+  const {
+    onMouseEnter,
+    onMouseLeave,
+    onMouseMove,
+    onClick,
+    ...restEvents
+  } = events;
 
   useEffect(() => {
     // TODO: DOMException: play() failed because the user didn't interact with the document first.
@@ -30,12 +38,23 @@ export const Player = (props) => {
     if (typeof onCurrentTime === 'function') onCurrentTime(event?.target || {});
   }
 
+  const userAgentProps = {
+    onMouseEnter: () => onMouseEnter(videoRef.current),
+    onMouseLeave: () => onMouseLeave(videoRef.current),
+    onMouseMove: () => onMouseMove(videoRef.current),
+  }
+
   return (
-    <>
-      <video ref={videoRef} onTimeUpdate={onTimeUpdate} onEnded={onEnded} {...events} {...options}>
+    <article className={namespace} {...userAgentProps}>
+      <video
+        ref={videoRef}
+        onClick={() => !hiddenControls && onClick(videoRef.current)}
+        onTimeUpdate={onTimeUpdate} onEnded={onEnded}
+        {...restEvents}
+        {...options}>
         {sources.map((source) => <source key={source.src} {...source} />)}
       </video>
-      <Controls isActive={!hasInteractive && isActive} paused={paused} />
-    </>
+      <Controls isActive={!hiddenControls && isActive} paused={paused} />
+    </article>
   )
 }

@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Icon, Button } from '../';
-import { playPause, useScene } from '../../contexts/SceneManager';
+import { playPause, skip, useScene } from '../../contexts/SceneManager';
+import { SKIP_SEC } from '../../constants'
 
 const namespace = "controls";
 const namespaceHidden = `${namespace}--hidden`;
@@ -10,18 +11,19 @@ export const Controls = (props) => {
     const { isMobile } = useScene();
 
     const classnames = clsx(namespace, { [namespaceHidden]: !isActive });
-    const onClick = () => {
+    const onPlayPause = () => {
         const videoEl = document.querySelector('video');
 
         playPause(videoEl);
     }
+    const onSkip = (seconds) => {
+        const videoEl = document.querySelector('video');
+        skip(seconds, videoEl);
+    }
 
     return <section className={classnames}>
-        {/* TODO: Convert in button when is mobile */}
-        <Icon onClick={onClick} className={`${namespace}__big-play`}>{paused ? 'play_circle' : 'pause_circle'}</Icon>
-        {/* TODO: Use as a button */}
-        <Icon onClick={onClick} className={`${namespace}__return-prev-scene`}>undo</Icon>
-        <Icon onClick={onClick} className={`${namespace}__forward`}>forward_10</Icon>
-        <Icon onClick={onClick} className={`${namespace}__replay`}>replay_10</Icon>
+        <Icon onClick={onPlayPause} className={`${namespace}__big-play`}>{paused ? 'play_circle' : 'pause_circle'}</Icon>
+        <Icon onClick={() => onSkip(SKIP_SEC)} className={`${namespace}__forward`}>forward_10</Icon>
+        <Icon onClick={() => onSkip(-SKIP_SEC)} className={`${namespace}__backward`}>replay_10</Icon>
     </section>;
 };

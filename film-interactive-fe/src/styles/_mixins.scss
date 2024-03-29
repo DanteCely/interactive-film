@@ -1,0 +1,19 @@
+@mixin activeRotateTransition($deg) {
+    transform: rotate(0);
+    transition: transform $duration-control ease-out;
+
+    &:active {
+      transform: rotate($deg);
+      transition: transform $duration-control ease-out;
+    }
+}
+
+@mixin activeScaleTransition($dec) {
+    transform: scale(1.2);
+    transition: transform $duration-control ease-out;
+
+    &:active {
+      transform: scale($dec);
+      transition: transform $duration-control ease-out;
+    }
+}

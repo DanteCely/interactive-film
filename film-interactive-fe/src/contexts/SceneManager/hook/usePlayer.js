@@ -8,6 +8,10 @@ export const playPause = (target = {}) => {
     else target.pause();
 }
 
+export const skip = (seconds = 0, target = {}) => {
+    target.currentTime += seconds;
+}
+
 const isMobile = navigator?.userAgentData?.mobile;
 
 export const usePlayer = (timeActive = 2500) => {
@@ -51,23 +55,23 @@ export const usePlayer = (timeActive = 2500) => {
     }
 
     const onClick = (event) => {
-        if (!isMobile) playPause(event?.currentTarget);
+        if (!isMobile) playPause(event);
     }
 
     const onMouseEnter = (event) => {
-        const { paused } = event?.currentTarget || {};
+        const { paused } = event || {};
 
         if (!paused && !isMobile) activeTempUser(timeActive);
     };
 
     const onMouseLeave = (event) => {
-        const { paused } = event?.currentTarget || {};
+        const { paused } = event || {};
 
         if (!paused && !isMobile) deactiveUser();
     };
 
     const onMouseMove = throttle((event) => {
-        const { paused } = event?.currentTarget || {};
+        const { paused } = event || {};
 
         if (!paused && !isMobile) activeTempUser(timeActive);
     }, 500);

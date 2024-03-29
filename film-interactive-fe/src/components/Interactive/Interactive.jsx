@@ -22,7 +22,7 @@ export const Interactive = (props) => {
   }
 
   const onClick = (event, { next }) => {
-    event?.currentTarget.classList.add('button--visited');
+    event?.currentTarget.classList.add('button__primary--visited');
     document.querySelector(`.${namespace}`).classList.add(namespaceHidden);
     setHasChosen(true);
     onChosenNextScene(next);
@@ -33,7 +33,12 @@ export const Interactive = (props) => {
       {currentTime !== undefined && <Timer total={total} currentTime={currentTime} onCountDownEnd={onCountDownEnd} />}
       <article className={`${namespace}__options`}>
         {options.map((option) => {
-          return <Button key={option.id} onClick={onClick} {...option} />
+          const buttonProps = {
+            type: 'primary',
+            onClick,
+            ...option
+          };
+          return <Button key={option.id} {...buttonProps} />
         })}
       </article>
     </section>
