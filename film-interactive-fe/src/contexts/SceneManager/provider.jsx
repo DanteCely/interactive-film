@@ -1,29 +1,18 @@
 /* eslint-disable react/prop-types */
 import { Provider } from './context';
-import { useCallback, useState, useMemo } from 'react';
-
-const arrayToMap = (array, key) => {
-  const myMap = new Map();
-
-  array.forEach(element => {
-    myMap.set(element[key], element);
-  });
-
-  return myMap;
-}
+import { useState } from 'react';
 
 let videoEl = null;
 let sourcesEl = [];
 
 export const SceneManagerProvider = (props) => {
-  const { children, script } = props;
+  const { children, script, options, prevOptions, isMobile } = props;
 
-  const film = useMemo(() => arrayToMap(script, 'id'), [script]);
-  const [currentScene, setCurrentScene] = useState(film.get('scene_1'));
+  const [currentScene, setCurrentScene] = useState(script.get('scene_1'));
   const [nextScene, setNextScene] = useState();
 
   const onChosenNextScene = (id) => {
-    const nextScene = film.get(id);
+    const nextScene = script.get(id);
 
     videoEl = document.createElement('video');
     videoEl.preload = 'auto';
@@ -38,17 +27,25 @@ export const SceneManagerProvider = (props) => {
     videoEl.append(...sourcesEl);
     videoEl.load();
 
-    setNextScene(film.get(id));
+    setNextScene(script.get(id));
   }
 
   const goToNextScene = () => {
     setCurrentScene(nextScene);
   }
 
+  const getObjectList = (keys = [], type) => {
+    if (keys && type === 'options') return keys.map(key => options.get(key));
+    else if (keys && type === 'prevOptions') return keys.map(key => prevOptions.get(key));
+    else return [];
+  }
+
   const value = {
+    isMobile,
     currentScene,
     goToNextScene,
     onChosenNextScene,
+    getObjectList,
   }
 
   return <Provider value={value}>{children}</Provider>;

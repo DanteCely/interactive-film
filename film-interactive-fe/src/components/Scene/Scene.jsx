@@ -11,11 +11,13 @@ const TYPE = {
 }
 
 export const Scene = (props) => {
-  const { type, defaultOption, options, decisionTime, sources, animationTime } = props;
+  const { type, defaultOption, options: _options, prevOptions: _prevOptions, decisionTime, sources, animationTime } = props;
 
-  const { goToNextScene } = useScene();
+  const { goToNextScene, getObjectList } = useScene();
   const totalTime = useMemo(() => decisionTime + animationTime, [decisionTime]);
   const [countDown, setCountDown] = useState();
+  const options = useMemo(() => getObjectList(_options, 'options'),[_options]);
+  const prevOptions = useMemo(() => getObjectList(_prevOptions, 'prevOptions'),[_prevOptions]);
 
   const onEnded = () => {
     setCountDown(undefined);

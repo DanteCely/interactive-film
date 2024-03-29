@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import { Icon, Button } from '../';
-import { playPause } from '../../contexts/SceneManager';
+import { playPause, useScene } from '../../contexts/SceneManager';
 
 const namespace = "controls";
 const namespaceHidden = `${namespace}--hidden`;
 
 export const Controls = (props) => {
     const { isActive, paused } = props;
+    const { isMobile } = useScene();
 
     const classnames = clsx(namespace, { [namespaceHidden]: !isActive });
     const onClick = () => {
@@ -22,7 +23,5 @@ export const Controls = (props) => {
         <Icon onClick={onClick} className={`${namespace}__return-prev-scene`}>undo</Icon>
         <Icon onClick={onClick} className={`${namespace}__forward`}>forward_10</Icon>
         <Icon onClick={onClick} className={`${namespace}__replay`}>replay_10</Icon>
-
-        
     </section>;
 };

@@ -13,22 +13,12 @@
       ],
       "decisionTime": 8,
       "defaultOption": 1,
-      "options": [
-        {
-          "id": "option_1",
-          "text": "Ir al balcón",
-          "next": "scene_2"
-        },
-        {
-          "id": "option_2",
-          "text": "Pelear contra el jefe final",
-          "next": "scene_3"
-        }
-      ]
+      "options": ["option_1", "option_2" ]
     },
     {
       "type": "closing_scene",
       "id": "scene_2",
+      "prevOptions": ["prev_option_1"],
       "sources": [
         {
           "src": "/assets/videos/video-0.mp4",
@@ -45,6 +35,29 @@
           "type": "video/mp4"
         }
       ]
+    }
+  ],
+  "options": [
+    {
+      "id": "option_1",
+      "text": "Ir al balcón",
+      "next": "scene_2"
+    },
+    {
+      "id": "option_2",
+      "text": "Pelear contra el jefe final",
+      "next": "scene_3"
+    }
+  ],
+  "prevOptions":[
+    {
+      "id": "prev_option_1",
+      "text": "¿Dónde ir?",
+      "prev": "scene_1",
+      "timeBeforeDecision": 10,
+      "poster": {
+        "src": "/assets/videos/prev-scene-2.jpg"
+      }
     }
   ]
 }
