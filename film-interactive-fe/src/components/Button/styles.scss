@@ -1,4 +1,8 @@
 .button {
+  &:hover {
+    cursor: pointer;
+  }
+
   &__primary {
     background-color: $primary-color;
     color: $primary-text-light;
@@ -8,7 +12,6 @@
     border: 2px solid $primary-border;
   
     &:hover {
-      cursor: pointer;
       background-color: lighten($primary-color, 10%);
       box-shadow: $box-shadow-lighten;
     }

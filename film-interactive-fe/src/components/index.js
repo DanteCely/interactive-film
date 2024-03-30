@@ -5,3 +5,4 @@ export * from './Timer/Timer.jsx';
 export * from './Interactive/Interactive.jsx';
 export * from './Scene/Scene.jsx';
 export * from './Controls/Controls.jsx'
+export * from './PrevOptions/PrevOptions.jsx'

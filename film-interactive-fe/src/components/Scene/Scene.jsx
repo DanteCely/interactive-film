@@ -14,36 +14,43 @@ export const Scene = (props) => {
     prevOptions: _prevOptions,
     decisionTime,
     sources,
-    delay,
   } = props;
 
-  const { goToNextScene, getObjectList } = useScene();
+  const {
+    goToNextScene,
+    getObjectList,
+    delayOptions,
+    skipSeconds,
+    videoRef,
+  } = useScene();
+  const [countDownOptions, setCountDownOptions] = useState();
   const [countDown, setCountDown] = useState();
   const options = useMemo(() => getObjectList(_options, TYPE.options), [_options]);
-  const prevOptions = useMemo(() => getObjectList(_prevOptions, TYPE.prev_options), [_prevOptions]);
 
   const onEnded = () => {
-    setCountDown(undefined);
+    setCountDownOptions(undefined);
     goToNextScene();
   }
 
   const onCurrentTime = ({ currentTime, duration }) => {
     const _countDown = Math.round(duration - currentTime);
-    const startTime = decisionTime + delay;
+    const startTime = decisionTime + delayOptions;
 
-    if (_countDown <= startTime && _countDown >= delay) setCountDown(_countDown - delay);
+    setCountDown(_countDown);
+    if (_countDown <= startTime && _countDown >= delayOptions) setCountDownOptions(_countDown - delayOptions);
   }
 
   const playerProps = {
     sources,
     onCurrentTime,
     onEnded,
-    hiddenControls: typeof countDown === 'number',
+    hiddenControls: countDown <= skipSeconds + decisionTime + delayOptions, // TODO:
   };
-  const interactiveProps = { total: decisionTime, currentTime: countDown, defaultOption, options };
+  const interactiveProps = { total: decisionTime, currentTime: countDownOptions, defaultOption, options };
 
   return <main className={namespace}>
     <Player {...playerProps} />
     <Interactive {...interactiveProps} />
+    {String(countDown) + '/' + String(videoRef.current?.duration)}
   </main>
 }

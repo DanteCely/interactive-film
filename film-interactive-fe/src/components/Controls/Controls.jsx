@@ -1,14 +1,17 @@
+import { useMemo } from 'react';
 import clsx from "clsx";
-import { Icon, Button } from '../';
+import { Icon, PrevOptions } from '../';
 import { playPause, skip, useScene } from '../../contexts/SceneManager';
-import { SKIP_SEC } from '../../constants'
+import { TYPE } from '../../constants';
 
 const namespace = "controls";
 const namespaceHidden = `${namespace}--hidden`;
 
 export const Controls = (props) => {
     const { isActive, paused } = props;
-    const { isMobile } = useScene();
+    const { currentScene, isMobile, getObjectList, skipSeconds } = useScene();
+    const { prevOptions: _prevOptions } = currentScene;
+    const prevOptions = useMemo(() => getObjectList(_prevOptions, TYPE.prev_options), [_prevOptions]);
 
     const classnames = clsx(namespace, { [namespaceHidden]: !isActive });
     const onPlayPause = () => {
@@ -20,10 +23,14 @@ export const Controls = (props) => {
         const videoEl = document.querySelector('video');
         skip(seconds, videoEl);
     }
+    const role = isMobile ? 'button' : 'img';
 
     return <section className={classnames}>
-        <Icon onClick={onPlayPause} className={`${namespace}__big-play`}>{paused ? 'play_circle' : 'pause_circle'}</Icon>
-        <Icon onClick={() => onSkip(SKIP_SEC)} className={`${namespace}__forward`}>forward_10</Icon>
-        <Icon onClick={() => onSkip(-SKIP_SEC)} className={`${namespace}__backward`}>replay_10</Icon>
+        <Icon role={role} onClick={onPlayPause} className={`${namespace}__big-play`}>
+            {paused ? 'play_circle' : 'pause_circle'}
+        </Icon>
+        <Icon role={role} onClick={() => onSkip(skipSeconds)} className={`${namespace}__forward`}>forward_10</Icon>
+        <Icon role={role} onClick={() => onSkip(-skipSeconds)} className={`${namespace}__backward`}>replay_10</Icon>
+        {!!prevOptions?.length && <PrevOptions className={`${namespace}__prev-scenes`} options={prevOptions} />}
     </section>;
 };

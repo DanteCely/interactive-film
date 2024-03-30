@@ -2,7 +2,7 @@
 import { Button, Timer } from "../";
 import clsx from 'clsx';
 import { useScene } from '../../contexts/SceneManager';
-import {useState } from "react";
+import { useState } from "react";
 
 const namespace = 'interactive';
 const namespaceHidden = `${namespace}--hidden`;

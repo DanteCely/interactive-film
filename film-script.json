@@ -1,6 +1,9 @@
 {
   "name": "Movie Film",
   "author": "Jhon Doe",
+  "delayOptions": 5,
+  "skipSeconds": 10,
+  "prevScenesTitle": "Escenas Previas",
   "script": [
     {
       "type": "scene",
@@ -18,7 +21,7 @@
     {
       "type": "closing_scene",
       "id": "scene_2",
-      "prevOptions": ["prev_option_1"],
+      "prevOptions": ["prev_option_1", "prev_option_1"],
       "sources": [
         {
           "src": "/assets/videos/video-0.mp4",
@@ -29,6 +32,7 @@
     {
       "type": "closing_scene",
       "id": "scene_3",
+      "prevOptions": ["prev_option_1"],
       "sources": [
         {
           "src": "/assets/videos/video-3.mp4",
@@ -54,7 +58,6 @@
       "id": "prev_option_1",
       "text": "¿Dónde ir?",
       "prev": "scene_1",
-      "timeBeforeDecision": 10,
       "poster": {
         "src": "/assets/videos/prev-scene-2.jpg"
       }

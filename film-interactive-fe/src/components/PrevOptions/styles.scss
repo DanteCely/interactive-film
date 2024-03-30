@@ -1,0 +1,49 @@
+.prev-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__title {
+        display: inherit;
+        justify-content: inherit;
+        align-items: inherit;
+    }
+
+    &__scenes {
+        display: inherit;
+        justify-content: inherit;
+        align-items: inherit;
+        margin: 0.5rem;
+        border-top: 4px solid white;
+        border-radius: 10px;
+
+        div {
+            width: -webkit-fill-available;
+            height: -webkit-fill-available;
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 95%) 15%, rgba(0, 212, 255, 0) 100%);
+        }
+    
+        p {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: $white;
+        }
+    
+        img {
+            width: 14rem;
+            aspect-ratio: 16 / 9;
+            margin-bottom: -5px; 
+        }
+    }
+
+    &__poster {
+        pointer-events: all;
+        padding: 0;
+        position: relative;
+        margin: 0.5rem;
+    }
+}

@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { arrayToMap } from './utils';
 import { useEffect, useState } from 'react';
 
-const { script, options, prevOptions } = filmScript;
+const { script, options, prevOptions, delayOptions, skipSeconds } = filmScript;
 
 const _script = arrayToMap(script, 'id');
 const _options = arrayToMap(options, 'id')
@@ -29,7 +29,13 @@ const App = () => {
   }, []);
 
   return <main className={classname}>
-    <SceneManagerProvider isMobile={isMobile} script={_script} options={_options} prevOptions={_prevOptions}>
+    <SceneManagerProvider
+      isMobile={isMobile}
+      delayOptions={delayOptions}
+      skipSeconds={skipSeconds}
+      script={_script}
+      options={_options}
+      prevOptions={_prevOptions}>
       <Film />
     </SceneManagerProvider>
   </main>
