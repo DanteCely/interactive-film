@@ -22,6 +22,7 @@
       "type": "closing_scene",
       "id": "scene_2",
       "prevOptions": ["prev_option_1", "prev_option_1"],
+      "nextScene": "credits_1",
       "sources": [
         {
           "src": "/assets/videos/video-0.mp4",
@@ -33,9 +34,21 @@
       "type": "closing_scene",
       "id": "scene_3",
       "prevOptions": ["prev_option_1"],
+      "nextScene": "credits_1",
       "sources": [
         {
           "src": "/assets/videos/video-3.mp4",
+          "type": "video/mp4"
+        }
+      ]
+    },
+    {
+      "type": "credits",
+      "id": "credits_1",
+      "prevOptions": ["prev_option_1"],
+      "sources": [
+        {
+          "src": "/assets/videos/credits.mp4",
           "type": "video/mp4"
         }
       ]

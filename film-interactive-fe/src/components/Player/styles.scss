@@ -6,4 +6,8 @@ article.player {
     width: 100vw;
     height: 100vh;
   }
+
+  &--hidden-cursor {
+    cursor: none;
+  }
 }
