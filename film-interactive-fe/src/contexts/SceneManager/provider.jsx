@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Provider } from './context';
-import { useState } from 'react';
 import { TYPE } from '../../constants';
-import { useRef } from 'react';
+import { playerInit, playerActions } from './player';
+import { reducer } from '../../utils';
+import { useReducer, useState, useRef } from 'react';
 
 let videoEl = null;
 let sourcesEl = [];
 
-// TODO: Organizar con reducers los hooks de Player y Scene
 // TODO: Reordenar componentes del contexto
 // TODO: Subir Videos e Imáges a una CDN
 // TODO: Desplegar App en un hosting
@@ -15,6 +15,9 @@ export const SceneManagerProvider = (props) => {
   const { children, delayOptions, isMobile, options, prevOptions, script, skipSeconds } = props;
   const videoRef = useRef(null);
 
+  const [playerState, playerDispatch] = useReducer(reducer(playerActions), playerInit);
+
+  // ======================
   const [currentScene, setCurrentScene] = useState(script.get('scene_1'));
   const [nextScene, setNextScene] = useState();
   const [hiddenTransition, setHiddenTransition] = useState(false);
@@ -55,13 +58,19 @@ export const SceneManagerProvider = (props) => {
   };
 
   const value = {
+    player: {
+      state: playerState,
+      dispatch: playerDispatch,
+    },
+    isMobile,
+    // ================
     currentScene,
     delayOptions,
     getObjectList,
     goToNextScene,
     goToPrevScene,
     hiddenTransition,
-    isMobile,
+
     onChosenNextScene,
     setHiddenTransition,
     skipSeconds,

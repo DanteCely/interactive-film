@@ -19,7 +19,7 @@ const namespace = 'player';
 export const Player = (props) => {
   const { sources = [], onCurrentTime, onEnded, hiddenControls } = props;
   const { videoRef, currentScene, delayOptions, skipSeconds, hiddenTransition, setHiddenTransition } = useScene();
-  const [{ paused, isActive }, events] = usePlayer();
+  const [{ paused, userActive }, events] = usePlayer();
   const { onMouseEnter, onMouseLeave, onMouseMove, onClick, ...restEvents } = events;
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const Player = (props) => {
     onMouseMove: () => onMouseMove(videoRef.current),
   };
 
-  const className = clsx(namespace, { [`${namespace}--hidden-cursor`]: !isActive });
+  const className = clsx(namespace, { [`${namespace}--hidden-cursor`]: !userActive });
 
   return (
     <article
@@ -72,7 +72,7 @@ export const Player = (props) => {
         ))}
       </video>
       <Controls
-        isActive={!hiddenTransition && !hiddenControls && isActive}
+        isActive={!hiddenTransition && !hiddenControls && userActive}
         paused={paused}
       />
     </article>

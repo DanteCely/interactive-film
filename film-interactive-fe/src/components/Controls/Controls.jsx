@@ -5,7 +5,6 @@ import { playPause, skip, useScene } from '../../contexts/SceneManager';
 import { TYPE } from '../../constants';
 
 const namespace = 'controls';
-const namespaceHidden = `${namespace}--hidden`;
 
 export const Controls = (props) => {
   const { isActive, paused } = props;
@@ -13,7 +12,7 @@ export const Controls = (props) => {
   const { prevOptions: _prevOptions } = currentScene;
   const prevOptions = useMemo(() => getObjectList(_prevOptions, TYPE.prev_options), [_prevOptions]);
 
-  const classnames = clsx(namespace, { [namespaceHidden]: !isActive });
+  const classnames = clsx(namespace, { [`${namespace}--hidden`]: !isActive });
   const onPlayPause = () => {
     const videoEl = document.querySelector('video');
 
