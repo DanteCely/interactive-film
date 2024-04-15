@@ -1,35 +1,28 @@
 /* eslint-disable react/prop-types */
 import { Button, Timer } from '../';
 import clsx from 'clsx';
-import { useScene } from '../../contexts/SceneManager';
-import { useEffect, useState } from 'react';
+import { useScenes, SET_NEXT_SCENE } from '../../contexts/SceneManager';
 
 const namespace = 'interactive';
 const namespaceHidden = `${namespace}--hidden`;
 
 export const Interactive = (props) => {
   const { currentTime, options, defaultOption, total } = props;
-  const { onChosenNextScene, currentScene } = useScene();
-  const [hasChosen, setHasChosen] = useState(false);
-
-  useEffect(() => {
-    setHasChosen(false);
-  }, [currentScene]);
+  const [state, dispatch] = useScenes();
 
   const onCountDownEnd = () => {
-    if (!hasChosen) {
+    if (!state.scene.optionChosen) {
       const option = options[defaultOption];
 
       document.getElementById(option.id).click();
-      onChosenNextScene(option.next);
+      dispatch({ type: SET_NEXT_SCENE, payload: option.next });
     }
   };
 
   const onClick = (event, { next }) => {
     event?.currentTarget.classList.add('button__primary--visited');
     document.querySelector(`.${namespace}`).classList.add(namespaceHidden);
-    setHasChosen(true);
-    onChosenNextScene(next);
+    dispatch({ type: SET_NEXT_SCENE, payload: next });
   };
 
   return (

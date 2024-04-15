@@ -1,17 +1,22 @@
 import { useMemo } from 'react';
 import clsx from 'clsx';
 import { Icon, PrevOptions } from '../';
-import { playPause, skip, useScene } from '../../contexts/SceneManager';
+import { useSceneManager, useScenes } from '../../contexts/SceneManager';
 import { TYPE } from '../../constants';
+import { playPause, skip } from '../../utils';
+import { getObjectsFromList } from '../../utils';
 
 const namespace = 'controls';
 
 export const Controls = (props) => {
   const { isActive, paused } = props;
-  const { currentScene, isMobile, getObjectList, skipSeconds } = useScene();
-  const { prevOptions: _prevOptions } = currentScene;
-  const prevOptions = useMemo(() => getObjectList(_prevOptions, TYPE.prev_options), [_prevOptions]);
+  const { isMobile } = useSceneManager();
+  const [state, dispatch] = useScenes();
+  const { skipSeconds } = state.configs;
+  const { previous: _previous } = state.scene.current || {};
+  const previous = useMemo(() => getObjectsFromList(_previous, state.previous), [_previous]);
 
+  const role = isMobile ? 'button' : 'img';
   const classnames = clsx(namespace, { [`${namespace}--hidden`]: !isActive });
   const onPlayPause = () => {
     const videoEl = document.querySelector('video');
@@ -23,7 +28,6 @@ export const Controls = (props) => {
     const videoEl = document.querySelector('video');
     skip(seconds, videoEl);
   };
-  const role = isMobile ? 'button' : 'img';
 
   return (
     <section className={classnames}>
@@ -48,10 +52,10 @@ export const Controls = (props) => {
       >
         replay_10
       </Icon>
-      {!!prevOptions?.length && (
+      {!!previous?.length && (
         <PrevOptions
           className={`${namespace}__prev-scenes`}
-          options={prevOptions}
+          options={previous}
         />
       )}
     </section>

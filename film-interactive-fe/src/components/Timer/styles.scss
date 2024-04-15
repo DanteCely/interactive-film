@@ -2,12 +2,13 @@
   background-color: $gray-200;
   border-radius: 0.5rem;
   box-shadow: $box-shadow-lighten;
-  height: 1.5rem;
-  margin: 0px auto 1rem;
-  transition: height 1s linear, width 1s linear;
+  height: 1rem;
+  margin: 0 auto 1.5rem;
+  transition: height 1s linear, margin 1s linear, width 1s linear;
   width: 100%;
 
   &--hidden {
     height: 0;
+    margin: 0px auto 0;
   }
 }

@@ -1,8 +1,8 @@
-import { useScene } from '../../contexts/SceneManager';
+import { useScenes } from '../../contexts/SceneManager';
 import { Scene } from '../../components';
 
 export const Film = () => {
-    const { currentScene } = useScene();
+  const [state] = useScenes();
 
-    return <Scene {...currentScene} delay={5} />
-}
+  return <Scene {...state.scene.current} />;
+};

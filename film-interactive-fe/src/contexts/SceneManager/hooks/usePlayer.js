@@ -1,11 +1,11 @@
 import { context } from '../context';
-import { SET_PAUSED, activeTempUser, activeUser, deactiveUser, playPause } from '../player';
-import { throttle } from '../../../utils';
+import { SET_PAUSED, activeTempUser, activeUser, deactiveUser } from '../player';
+import { throttle, playPause } from '../../../utils';
 import { useContext } from 'react';
 
 export const usePlayer = () => {
   const {
-    player: { state, dispatch },
+    player: { state, dispatch, videoRef },
     isMobile,
   } = useContext(context);
 
@@ -65,5 +65,5 @@ export const usePlayer = () => {
     onClick,
   };
 
-  return [state, events];
+  return [state, events, videoRef];
 };

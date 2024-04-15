@@ -10,6 +10,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr repeat(2, 2fr);
   grid-gap: 16px;
+  background-color: rgba(0, 0, 0, 0.3);
 
   &--hidden {
     transition: visibility $duration-control, opacity $duration-control linear;
@@ -24,7 +25,6 @@
     align-self: center;
     font-size: 6rem;
     @include activeScaleTransition(2);
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(255, 255, 255, 0) 70%)
   }
 
   &__forward {
@@ -35,7 +35,6 @@
     pointer-events: all;
     cursor: pointer;
     @include activeRotateTransition(90deg);
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(255, 255, 255, 0) 70%)
   }
 
   &__backward {
@@ -46,7 +45,6 @@
     pointer-events: all;
     cursor: pointer;
     @include activeRotateTransition(-90deg);
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(255, 255, 255, 0) 70%)
   }
 
   &__prev-scenes {

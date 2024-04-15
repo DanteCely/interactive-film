@@ -1,22 +1,27 @@
 /* eslint-disable react/prop-types */
 import { Player, Interactive } from '../';
 import { useState, useMemo } from 'react';
-import { useScene } from '../../contexts/SceneManager';
+import { useScenes, goToNextScene, useSceneManager } from '../../contexts/SceneManager';
 import { TYPE } from '../../constants';
+import { getObjectsFromList } from '../../utils';
 
 const namespace = 'scene';
 // TODO: realizar comportamiento para los tipos scene, closing_scene & credits
 export const Scene = (props) => {
-  const { type, defaultOption, options: _options, prevOptions: _prevOptions, decisionTime, sources } = props;
+  const { type, defaultOption, options: _options, previous: _previous, decisionTime, sources } = props;
 
-  const { goToNextScene, getObjectList, delayOptions, skipSeconds, videoRef } = useScene();
+  const { setHiddenTransition } = useSceneManager();
+  const [state, dispatch] = useScenes();
+  const { skipSeconds, delayOptions } = state.configs;
+
   const [countDownOptions, setCountDownOptions] = useState();
   const [countDown, setCountDown] = useState();
-  const options = useMemo(() => getObjectList(_options, TYPE.options), [_options]);
+  const options = useMemo(() => getObjectsFromList(_options, state.options), [_options]);
 
   const onEnded = () => {
     setCountDownOptions(undefined);
-    goToNextScene();
+    goToNextScene(dispatch);
+    setHiddenTransition(true);
   };
 
   const onCurrentTime = ({ currentTime, duration }) => {

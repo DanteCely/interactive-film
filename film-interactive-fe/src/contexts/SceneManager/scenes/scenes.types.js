@@ -1,0 +1,2 @@
+export const SET_CURRENT_SCENE = 'SET_CURRENT_SCENE';
+export const SET_NEXT_SCENE = 'SET_NEXT_SCENE';

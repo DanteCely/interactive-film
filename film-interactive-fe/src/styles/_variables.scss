@@ -8,8 +8,9 @@
   'opsz' 24
 }
 
-$box-shadow: 0 0 5px 0 transparentize($black, 0.5);
-$box-shadow-lighten: 0 0 10px 0 transparentize($white, 0.5);
+$box-shadow: 0 0 12px 4px $primary-border;
+$box-shadow-lighten: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem $primary-color, 0 0 0.8rem $primary-color, 0 0 2.8rem $primary-color, inset 0 0 1.3rem $primary-color;
+$text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
 
 $delay: 3s;
 $duration: 1s;

@@ -2,7 +2,7 @@
   background-color: $background-dark-transparent;
   padding: 3rem;
   width: 100%;
-  bottom: 5vh;
+  bottom: 0;
   opacity: 1;
   visibility: visible;
   transition: visibility $duration, opacity $duration linear, bottom $duration linear;
@@ -19,5 +19,10 @@
     display: grid;
     grid-template-columns: auto auto;
     gap: 1rem;
+    justify-content: center;
   }
+}
+
+.mobile .interactive {
+  padding: 1rem;
 }

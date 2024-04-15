@@ -21,14 +21,3 @@ export const deactiveUser = (dispatch) => {
   dispatch({ type: SET_USER_ACTIVE, payload: false });
   clearTimeout(activeTimeId);
 };
-
-export const playPause = (target = {}) => {
-  const { paused } = target;
-
-  if (paused) target.play();
-  else target.pause();
-};
-
-export const skip = (seconds = 0, target = {}) => {
-  target.currentTime += seconds;
-};

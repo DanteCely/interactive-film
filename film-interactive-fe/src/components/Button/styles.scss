@@ -4,29 +4,31 @@
   }
 
   &__primary {
-    background-color: $primary-color;
+    background-color: transparentize($primary-color, 0.6);
     color: $primary-text-light;
     padding-block: 1rem;
-    padding-inline: 2rem;
+    padding-inline: 1.5rem;
     border-radius: 50px;
-    border: 2px solid $primary-border;
+    backdrop-filter: blur(5px);
+    border: 2px solid transparentize($primary-border, 0.6);
+    box-shadow: $box-shadow-lighten;
+    box-shadow: 0 0 12px $primary-border;
   
     &:hover {
-      background-color: lighten($primary-color, 10%);
-      box-shadow: $box-shadow-lighten;
+      box-shadow: $box-shadow;
+      text-shadow: $text-shadow
     }
   
     &:active {
-      background-color: darken($primary-color, 10%);
-      box-shadow: none;
-      border-color: darken($primary-border, 20%);
-      color: darken($primary-text-light, 20%)
+      background-color: lighten($primary-color, 10%);
+      box-shadow: $box-shadow;
+      text-shadow: $text-shadow
     }
   
     &--visited {
-      background-color: lighten($primary-color, 75%);
-      color: $primary-text-dark;
-      box-shadow: $box-shadow-lighten;
+      background-color: lighten($primary-color, 10%);
+      box-shadow: $box-shadow;
+      text-shadow: $text-shadow
     }
   }
 }

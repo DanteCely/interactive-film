@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect } from 'react';
-import { usePlayer, useScene } from '../../contexts/SceneManager';
+import { usePlayer, useSceneManager, useScenes } from '../../contexts/SceneManager';
 import { Controls } from '../';
+import { playPause } from '../../utils';
 import clsx from 'clsx';
 
 const options = {
@@ -18,9 +19,24 @@ const namespace = 'player';
 
 export const Player = (props) => {
   const { sources = [], onCurrentTime, onEnded, hiddenControls } = props;
-  const { videoRef, currentScene, delayOptions, skipSeconds, hiddenTransition, setHiddenTransition } = useScene();
-  const [{ paused, userActive }, events] = usePlayer();
+  const { hiddenTransition, setHiddenTransition } = useSceneManager();
+  const [state, dispatch] = useScenes();
+  const { delayOptions, skipSeconds } = state.configs;
+  const [{ paused, userActive }, events, videoRef] = usePlayer();
   const { onMouseEnter, onMouseLeave, onMouseMove, onClick, ...restEvents } = events;
+
+  useEffect(() => {
+    const handleResize = ({ code }) => {
+      if (code === 'Space') {
+        playPause(videoRef.current);
+      }
+    };
+    window.addEventListener('keydown', handleResize);
+
+    return () => {
+      window.removeEventListener('keydown', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     // TODO: Ajustar error -> DOMException: play() failed because the user didn't interact with the document first.
@@ -31,8 +47,8 @@ export const Player = (props) => {
   }, [sources]);
 
   const onDurationChange = () => {
-    if (currentScene.isPrev) {
-      const { decisionTime } = currentScene;
+    if (state.scene.isPrev) {
+      const { decisionTime } = state.scene.current;
       const { duration } = videoRef.current || {};
       videoRef.current.currentTime = duration - (delayOptions + decisionTime + skipSeconds * 3);
     }
