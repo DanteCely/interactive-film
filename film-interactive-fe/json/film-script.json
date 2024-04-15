@@ -22,7 +22,7 @@
       "options": ["option_1", "option_2" ]
     },
     {
-      "type": "closing_scene",
+      "type": "scene",
       "id": "scene_2",
       "previous": ["prev_option_1", "prev_option_1"],
       "nextScene": "credits_1",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "type": "closing_scene",
+      "type": "scene",
       "id": "scene_3",
       "previous": ["prev_option_1"],
       "nextScene": "credits_1",
@@ -64,7 +64,7 @@
       "text": "¿Dónde ir?",
       "prevId": "scene_1",
       "poster": {
-        "src": "/assets/videos/prev-scene-2.jpg"
+        "src": "/assets/images/prev-scene-2.jpg"
       }
     }
   ]

@@ -22,7 +22,7 @@
             width: -webkit-fill-available;
             height: -webkit-fill-available;
             position: absolute;
-            bottom: -1px;
+            bottom: 0;
             background: linear-gradient(0deg, rgba(0, 0, 0, 95%) 15%, rgba(0, 212, 255, 0) 100%);
         }
     
@@ -34,9 +34,9 @@
         }
     
         img {
-            width: 14rem;
+            width: 16rem;
             aspect-ratio: 16 / 9;
-            margin-bottom: -5px; 
+            margin-bottom: 0; 
         }
     }
 
@@ -46,4 +46,8 @@
         position: relative;
         margin: 0.5rem;
     }
+}
+
+.mobile .prev-options__scenes img {
+    width: 12rem; 
 }

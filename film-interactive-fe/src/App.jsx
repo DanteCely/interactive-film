@@ -1,34 +1,31 @@
 import clsx from 'clsx';
-import filmScript from '../../film-script.json';
+import filmScript from '../json/film-script.json';
 import { Film } from './pages/Film';
 import { SceneManagerProvider } from './contexts/SceneManager';
 import { useEffect, useState } from 'react';
+import { useEventListener } from './hooks';
 
 const namespace = 'app';
 
 const App = () => {
-  const [isMobile, setIsMobile] = useState(navigator.userAgentData.mobile);
-  const classname = clsx(namespace, { mobile: isMobile });
+	const [isMobile, setIsMobile] = useState(navigator.userAgentData.mobile);
+	const [fullscreen, setFullscreen] = useState(document.fullscreenElement);
+	const classname = clsx(namespace, { mobile: isMobile });
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(navigator.userAgentData.mobile);
-    window.addEventListener('resize', handleResize);
+	useEffect(() => {
+		document.title = filmScript?.name;
+	}, []);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+	useEventListener('resize', () => setIsMobile(navigator.userAgentData.mobile));
+	useEventListener('fullscreenchange', () => setFullscreen(document.fullscreenElement));
 
-  return (
-    <main className={classname}>
-      <SceneManagerProvider
-        isMobile={isMobile}
-        sceneInit={filmScript}
-      >
-        <Film />
-      </SceneManagerProvider>
-    </main>
-  );
+	return (
+		<main className={classname}>
+			<SceneManagerProvider fullscreen={fullscreen} isMobile={isMobile} sceneInit={filmScript}>
+				<Film />
+			</SceneManagerProvider>
+		</main>
+	);
 };
 
 export default App;

@@ -10,27 +10,28 @@ import { useReducer, useState, useRef } from 'react';
 // TODO: Subir Videos e Imáges a una CDN
 // TODO: Desplegar App en un hosting
 export const SceneManagerProvider = (props) => {
-  const { children, isMobile, sceneInit } = props;
-  const videoRef = useRef(null);
+	const { children, fullscreen, isMobile, sceneInit } = props;
+	const videoRef = useRef(null);
 
-  const [playerState, playerDispatch] = useReducer(reducer(playerActions), playerInit);
-  const [sceneState, sceneDispatch] = useReducer(reducer(sceneActions), sceneInit, sceneInitialize);
-  const [hiddenTransition, setHiddenTransition] = useState(false); // TODO: Reorganizar
+	const [playerState, playerDispatch] = useReducer(reducer(playerActions), playerInit);
+	const [sceneState, sceneDispatch] = useReducer(reducer(sceneActions), sceneInit, sceneInitialize);
+	const [hiddenTransition, setHiddenTransition] = useState(false); // TODO: Reorganizar
 
-  const value = {
-    player: {
-      state: playerState,
-      dispatch: playerDispatch,
-      videoRef,
-    },
-    scenes: {
-      state: sceneState,
-      dispatch: sceneDispatch,
-    },
-    isMobile,
-    hiddenTransition,
-    setHiddenTransition,
-  };
+	const value = {
+		player: {
+			state: playerState,
+			dispatch: playerDispatch,
+			videoRef,
+		},
+		scenes: {
+			state: sceneState,
+			dispatch: sceneDispatch,
+		},
+		isMobile,
+		fullscreen,
+		hiddenTransition,
+		setHiddenTransition,
+	};
 
-  return <Provider value={value}>{children}</Provider>;
+	return <Provider value={value}>{children}</Provider>;
 };
