@@ -2,23 +2,20 @@ import clsx from 'clsx';
 import { Button } from '../';
 import { useScenes, goToPrevScene } from '../../contexts/SceneManager';
 
-const PrevScene = ({ poster, className, text, prevId }) => {
-  const [state, dispatch] = useScenes();
+const PrevScene = ({ poster, className, text, id }) => {
+	const [state, dispatch] = useScenes();
 
-  const onClick = () => {
-    goToPrevScene(prevId, dispatch);
-  };
+	const onClick = () => {
+		goToPrevScene(id, dispatch);
+	};
 
-  return (
-    <Button
-      onClick={onClick}
-      className={className}
-    >
-      <img src={poster.src} />
-      <div />
-      <p>{text}</p>
-    </Button>
-  );
+	return (
+		<Button onClick={onClick} className={className}>
+			<img src={poster.src} />
+			<div />
+			<p>{text}</p>
+		</Button>
+	);
 };
 
 const namespace = 'prev-options';
@@ -27,22 +24,16 @@ const namespaceTitle = `${namespace}__title`;
 const namespaceScenes = `${namespace}__scenes`;
 
 export const PrevOptions = (props) => {
-  const { options, className } = props;
+	const { options, className } = props;
 
-  return (
-    <article className={clsx(namespace, className)}>
-      <h2 className={namespaceTitle}>Escenas previas</h2>
-      <div className={namespaceScenes}>
-        {options.map((option) => {
-          return (
-            <PrevScene
-              key={option.id}
-              className={namespacePoster}
-              {...option}
-            />
-          );
-        })}
-      </div>
-    </article>
-  );
+	return (
+		<article className={clsx(namespace, className)}>
+			<h2 className={namespaceTitle}>Escenas previas</h2>
+			<div className={namespaceScenes}>
+				{options.map((option) => {
+					return <PrevScene key={option.id} className={namespacePoster} {...option} />;
+				})}
+			</div>
+		</article>
+	);
 };

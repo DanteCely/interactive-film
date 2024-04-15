@@ -8,47 +8,47 @@ import { getObjectsFromList } from '../../utils';
 const namespace = 'scene';
 // TODO: realizar comportamiento para los tipos scene, closing_scene & credits
 export const Scene = (props) => {
-  const { type, defaultOption, options: _options, previous: _previous, decisionTime, sources } = props;
+	const { type, defaultOption, options: _options, previous: _previous, decisionTime, sources } = props;
 
-  const { setHiddenTransition } = useSceneManager();
-  const [state, dispatch] = useScenes();
-  const { skipSeconds, delayOptions } = state.configs;
+	const { setHiddenTransition } = useSceneManager();
+	const [state, dispatch] = useScenes();
+	const { skipSeconds, delayOptions } = state.configs;
 
-  const [countDownOptions, setCountDownOptions] = useState();
-  const [countDown, setCountDown] = useState();
-  const options = useMemo(() => getObjectsFromList(_options, state.options), [_options]);
+	const [countDownOptions, setCountDownOptions] = useState();
+	const [countDown, setCountDown] = useState();
+	const options = useMemo(() => getObjectsFromList(_options, state.options), [_options]);
 
-  const onEnded = () => {
-    setCountDownOptions(undefined);
-    goToNextScene(dispatch);
-    setHiddenTransition(true);
-  };
+	const onEnded = () => {
+		setCountDownOptions(undefined);
+		goToNextScene(dispatch);
+		setHiddenTransition(true);
+	};
 
-  const onCurrentTime = ({ currentTime, duration }) => {
-    const _countDown = Math.round(duration - currentTime);
-    const startTime = decisionTime + delayOptions;
+	const onCurrentTime = ({ currentTime, duration }) => {
+		const _countDown = Math.round(duration - currentTime);
+		const startTime = decisionTime + delayOptions;
 
-    setCountDown(_countDown);
-    if (_countDown <= startTime && _countDown >= delayOptions) setCountDownOptions(_countDown - delayOptions);
-  };
+		setCountDown(_countDown);
+		if (_countDown <= startTime && _countDown >= delayOptions) setCountDownOptions(_countDown - delayOptions);
+	};
 
-  const playerProps = {
-    sources,
-    onCurrentTime,
-    onEnded,
-    hiddenControls: countDown <= decisionTime + delayOptions + skipSeconds * 2,
-  };
-  const interactiveProps = {
-    total: decisionTime,
-    currentTime: countDownOptions,
-    defaultOption,
-    options,
-  };
+	const playerProps = {
+		sources,
+		onCurrentTime,
+		onEnded,
+		hiddenControls: countDown <= decisionTime + delayOptions + skipSeconds * 2,
+	};
+	const interactiveProps = {
+		total: decisionTime,
+		currentTime: countDownOptions,
+		defaultOption,
+		options,
+	};
 
-  return (
-    <main className={namespace}>
-      <Player {...playerProps} />
-      <Interactive {...interactiveProps} />
-    </main>
-  );
+	return (
+		<main className={namespace}>
+			<Player {...playerProps} />
+			{!!options?.length && <Interactive {...interactiveProps} />}
+		</main>
+	);
 };
