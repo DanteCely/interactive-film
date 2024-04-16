@@ -2,7 +2,7 @@
 	"name": "Movie Film",
 	"author": "Jhon Doe",
 	"configs": {
-		"delayOptions": 5,
+		"delayOptions": 10,
 		"skipSeconds": 10,
 		"prevScenesTitle": "Escenas Previas",
 		"firstSceneId": "matrix-1_first-floor-shots"

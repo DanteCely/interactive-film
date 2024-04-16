@@ -1,5 +1,24 @@
+import { mobileRegex } from '../constants';
+
 let videoEl = null;
 let sourcesEl = [];
+let once = true;
+
+const fullScreenOnce = (paused) => {
+	if (once && paused && !document.fullscreenElement) {
+		document.documentElement.requestFullscreen();
+		once = false;
+	}
+};
+
+export const playPause = (target = {}) => {
+	const { paused } = target;
+
+	fullScreenOnce(paused);
+
+	if (paused) target.play();
+	else target.pause();
+};
 
 export const preloadNextScene = (nextScene) => {
 	videoEl = document.createElement('video');
@@ -14,13 +33,6 @@ export const preloadNextScene = (nextScene) => {
 	});
 	videoEl.append(...sourcesEl);
 	videoEl.load();
-};
-
-export const playPause = (target = {}) => {
-	const { paused } = target;
-
-	if (paused) target.play();
-	else target.pause();
 };
 
 export const skip = (seconds = 0, target = {}) => {
@@ -38,3 +50,5 @@ export const toggleFullScreen = () => {
 export const goBack = () => {
 	window.history.go(-1);
 };
+
+export const isDeviceMobile = () => mobileRegex.some((expresion) => navigator.userAgent.match(expresion));

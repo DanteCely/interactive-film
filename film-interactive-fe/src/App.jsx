@@ -4,11 +4,12 @@ import { Film } from './pages/Film';
 import { SceneManagerProvider } from './contexts/SceneManager';
 import { useEffect, useState } from 'react';
 import { useEventListener } from './hooks';
+import { isDeviceMobile } from './utils';
 
 const namespace = 'app';
 
 const App = () => {
-	const [isMobile, setIsMobile] = useState(navigator.userAgentData.mobile);
+	const [isMobile, setIsMobile] = useState(isDeviceMobile());
 	const [fullscreen, setFullscreen] = useState(document.fullscreenElement);
 	const classname = clsx(namespace, { mobile: isMobile });
 
@@ -16,7 +17,7 @@ const App = () => {
 		document.title = filmScript?.name;
 	}, []);
 
-	useEventListener('resize', () => setIsMobile(navigator.userAgentData.mobile));
+	useEventListener('resize', () => setIsMobile(isDeviceMobile()));
 	useEventListener('fullscreenchange', () => setFullscreen(document.fullscreenElement));
 
 	return (

@@ -52,11 +52,9 @@ export const Controls = (props) => {
 				replay_10
 			</Icon>
 			{!!previous?.length && <PrevOptions className={`${namespace}__prev-scenes`} options={previous} />}
-			{!isMobile && (
-				<Icon role={role} onClick={() => toggleFullScreen()} className={`${namespace}__fullscreen`}>
-					{fullscreen ? 'fullscreen_exit' : 'fullscreen'}
-				</Icon>
-			)}
+			<Icon role={role} onClick={() => toggleFullScreen()} className={`${namespace}__fullscreen`}>
+				{fullscreen ? 'fullscreen_exit' : 'fullscreen'}
+			</Icon>
 		</section>
 	);
 };
