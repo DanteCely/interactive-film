@@ -5,7 +5,10 @@ let sourcesEl = [];
 let once = true;
 
 const fullScreenOnce = (paused) => {
-	if (once && paused && !document.fullscreenElement) {
+	const canFullscreen =
+		!document.fullscreenElement && typeof document?.documentElement?.requestFullscreen === 'function';
+
+	if (once && paused && canFullscreen) {
 		document.documentElement.requestFullscreen();
 		once = false;
 	}
@@ -14,15 +17,15 @@ const fullScreenOnce = (paused) => {
 export const playPause = (target = {}) => {
 	const { paused } = target;
 
-	fullScreenOnce(paused);
-
 	if (paused) target.play();
 	else target.pause();
+
+	fullScreenOnce(paused);
 };
 
 export const preloadNextScene = (nextScene) => {
 	videoEl = document.createElement('video');
-	videoEl.preload = 'auto';
+	videoEl.preload = 'metadata';
 	sourcesEl = nextScene.sources.map(({ src, type }) => {
 		const sourceEl = document.createElement('source');
 
