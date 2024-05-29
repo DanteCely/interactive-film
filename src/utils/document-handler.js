@@ -2,16 +2,9 @@ import { mobileRegex } from '../constants';
 
 let videoEl = null;
 let sourcesEl = [];
-let once = true;
 
-const fullScreenOnce = (paused) => {
-	const canFullscreen =
-		!document.fullscreenElement && typeof document?.documentElement?.requestFullscreen === 'function';
-
-	if (once && paused && canFullscreen) {
-		document.documentElement.requestFullscreen();
-		once = false;
-	}
+export const play = (target = {}) => {
+	target.play();
 };
 
 export const playPause = (target = {}) => {
@@ -19,8 +12,6 @@ export const playPause = (target = {}) => {
 
 	if (paused) target.play();
 	else target.pause();
-
-	fullScreenOnce(paused);
 };
 
 export const preloadNextScene = (nextScene) => {

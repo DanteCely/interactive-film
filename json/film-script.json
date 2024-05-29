@@ -1,147 +1,109 @@
 {
-	"name": "Movie Film",
-	"author": "Jhon Doe",
+	"name": "Tierra de Santas",
+	"author": "Distrito P",
 	"configs": {
-		"delayOptions": 10,
+		"delayOptions": 5,
 		"skipSeconds": 10,
 		"prevScenesTitle": "Escenas Previas",
-		"firstSceneId": "matrix-1_first-floor-shots"
+		"firstSceneId": "escena_1"
 	},
 	"script": [
 		{
-			"id": "matrix-1_first-floor-shots",
-      "type": "scene",
+			"id": "escena_1",
+      "type": "first_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/matrix-1_first-floor-shots.mp4",
+					"src": "/assets/videos/escena_1.mp4",
 					"type": "video/mp4"
 				}
 			],
 			"decisionTime": 10,
 			"defaultOption": 0,
-			"options": ["matrix-2_fight-twins", "matrix-1_last-floor-fight"]
+			"options": ["escena_2", "escena_3"]
 		},
 		{
-			"id": "matrix-2_fight-twins",
+			"id": "escena_2",
       "type": "scene",
 			"sources": [
 				{
-					"src": "/assets/videos/matrix-2_fight-twins.mp4",
+					"src": "/assets/videos/escena_2.mp4",
 					"type": "video/mp4"
 				}
 			],
 			"decisionTime": 10,
 			"defaultOption": 1,
-			"options": ["matrix-2_car-chase", "matrix-2_street-fight"],
-			"previous": ["matrix-1_first-floor-shots"]
+			"options": ["escena_4", "escena_5"],
+			"previous": ["escena_1"]
 		},
     {
-			"id": "matrix-1_last-floor-fight",
-      "type": "scene",
+			"id": "escena_3",
+      "type": "last_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/matrix-1_last-floor-fight.mp4",
+					"src": "/assets/videos/escena_3.mp4",
 					"type": "video/mp4"
 				}
 			],
-			"decisionTime": 10,
-			"defaultOption": 1,
-			"options": ["matrix-2_street-fight", "matrix-2_fight-crowd"],
-			"previous": ["matrix-1_first-floor-shots"]
+			"previous": ["escena_1"]
 		},
 		{
-			"id": "matrix-2_car-chase",
-      "type": "scene",
+			"id": "escena_4",
+      "type": "last_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/matrix-2_car-chase.mp4",
+					"src": "/assets/videos/escena_4.mp4",
 					"type": "video/mp4"
 				}
 			],
-			"decisionTime": 10,
-			"defaultOption": 1,
-			"options": ["matrix-2_street-fight", "matrix-2_fight-crowd"],
-			"previous": ["matrix-2_fight-twins", "matrix-1_first-floor-shots"]
+			"previous": ["escena_1", "escena_2"]
 		},
 		{
-			"id": "matrix-2_street-fight",
-      "type": "final",
+			"id": "escena_5",
+      "type": "last_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/matrix-2_street-fight.mp4",
+					"src": "/assets/videos/escena_5.mp4",
 					"type": "video/mp4"
 				}
 			],
-			"decisionTime": 10,
-			"previous": ["matrix-1_first-floor-shots", "matrix-2_fight-twins", "matrix-2_car-chase"]
-		},
-		{
-			"id": "matrix-2_fight-crowd",
-      "type": "final",
-			"sources": [
-				{
-					"src": "/assets/videos/matrix-2_fight-crowd.mp4",
-					"type": "video/mp4"
-				}
-			],
-			"decisionTime": 10,
-			"previous": ["matrix-1_first-floor-shots", "matrix-1_last-floor-fight", "matrix-2_car-chase"]
+			"previous": ["escena_1", "escena_2"]
 		}
 	],
 	"options": [
 		{
-			"id": "matrix-2_fight-twins",
-			"text": "Pelear con los gemelos",
-			"next": "matrix-2_fight-twins"
+			"id": "escena_2",
+			"text": "Escuchar a Sofia",
+			"next": "escena_2"
 		},
 		{
-			"id": "matrix-1_last-floor-fight",
-			"text": "Ir al último piso",
-			"next": "matrix-1_last-floor-fight"
+			"id": "escena_3",
+			"text": "Ignorarla",
+			"next": "escena_3"
 		},
 		{
-			"id": "matrix-2_car-chase",
-			"text": "Escapar de los gemelos",
-			"next": "matrix-2_car-chase"
+			"id": "escena_4",
+			"text": "Escapar con Paula",
+			"next": "escena_4"
 		},
 		{
-			"id": "matrix-2_street-fight",
-			"text": "Pelear por la carretera",
-			"next": "matrix-2_street-fight"
-		},
-		{
-			"id": "matrix-2_fight-crowd",
-			"text": "Pelear con jefe final",
-			"next": "matrix-2_fight-crowd"
+			"id": "escena_5",
+			"text": "Seguir en lo mismo",
+			"next": "escena_5"
 		}
 	],
 	"previous": [
 		{
-			"id": "matrix-1_first-floor-shots",
-			"text": "De vuelta a la entrada",
+			"id": "escena_1",
+			"text": "De vuelta a la terraza",
 			"poster": {
-				"src": "/assets/images/matrix-1_first-floor-shots.png"
+				"src": "/assets/images/escena_1.png"
 			}
 		},
 		{
-			"id": "matrix-2_fight-twins",
-			"text": "Contra los gemelos",
+			"id": "escena_2",
+			"text": "Volver a la habitación",
 			"poster": {
-				"src": "/assets/images/matrix-2_fight-twins.png"
-			}
-		},
-    {
-			"id": "matrix-2_car-chase",
-			"text": "Volver a la persecusión",
-			"poster": {
-				"src": "/assets/images/matrix-2_car-chase.png"
-			}
-		},
-    {
-			"id": "matrix-1_last-floor-fight",
-			"text": "Desde el techo",
-			"poster": {
-				"src": "/assets/images/matrix-1_last-floor-fight.jpg"
+				"src": "/assets/images/escena_2.png"
 			}
 		}
 	]

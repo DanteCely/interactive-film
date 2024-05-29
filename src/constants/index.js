@@ -1,6 +1,7 @@
 export const TYPE = {
+	first_scene: 'first_scene',
 	scene: 'scene',
-	closing_scene: 'closing_scene',
+	last_scene: 'last_scene',
 	options: 'options',
 	prev_options: 'prev_options',
 };

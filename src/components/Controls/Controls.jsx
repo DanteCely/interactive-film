@@ -1,15 +1,15 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import clsx from 'clsx';
 import { Icon, PrevOptions } from '../';
 import { useSceneManager, useScenes, usePlayer } from '../../contexts/SceneManager';
 import { useEventListener } from '../../hooks';
-import { playPause, skip, toggleFullScreen, goBack } from '../../utils';
+import { play, playPause, skip, toggleFullScreen, goBack } from '../../utils';
 import { getObjectsFromList } from '../../utils';
 
 const namespace = 'controls';
 
 export const Controls = (props) => {
-	const { isActive, paused } = props;
+	const { isActive, paused, hidden } = props;
 	const { isMobile, fullscreen } = useSceneManager();
 	const [state, dispatch] = useScenes();
 	const [, , videoRef] = usePlayer();
@@ -18,9 +18,13 @@ export const Controls = (props) => {
 	const previous = useMemo(() => getObjectsFromList(_previous, state.previous), [_previous]);
 
 	const role = isMobile ? 'button' : 'img';
-	const classnames = clsx(namespace, { [`${namespace}--hidden`]: !isActive });
+	const classnames = clsx(namespace, { [`${namespace}--hidden`]: !isActive || hidden });
+
+	useEffect(() => {
+		if (hidden && videoRef.current.paused) play(videoRef.current);
+	}, [hidden]);
+
 	const onSkip = (seconds) => {
-		// TODO: Cuando está pausado en zona de desición darle play con playPause
 		const videoEl = document.querySelector('video');
 		skip(seconds, videoEl);
 	};
@@ -29,8 +33,8 @@ export const Controls = (props) => {
 		const keyAction = {
 			KeyF: () => toggleFullScreen(),
 			Space: () => playPause(videoRef.current),
-			ArrowRight: () => onSkip(skipSeconds),
-			ArrowLeft: () => onSkip(-skipSeconds),
+			ArrowRight: () => onSkip(skipSeconds), // TODO: Impedir que que haga skip cuando tenemos estado hidden
+			ArrowLeft: () => onSkip(-skipSeconds), // TODO: Impedir que que haga skip cuando tenemos estado hidden
 		};
 
 		const action = keyAction[code];

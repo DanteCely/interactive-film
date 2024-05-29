@@ -3,10 +3,10 @@ import { Player, Interactive } from '../';
 import { useState, useMemo } from 'react';
 import { useScenes, goToNextScene, useSceneManager } from '../../contexts/SceneManager';
 import { TYPE } from '../../constants';
-import { getObjectsFromList } from '../../utils';
+import { getObjectsFromList, goBack } from '../../utils';
 
 const namespace = 'scene';
-// TODO: realizar comportamiento para los tipos scene, closing_scene & credits
+
 export const Scene = (props) => {
 	const { type, defaultOption, options: _options, previous: _previous, decisionTime, sources } = props;
 
@@ -22,6 +22,8 @@ export const Scene = (props) => {
 		setCountDownOptions(undefined);
 		goToNextScene(dispatch);
 		setHiddenTransition(true);
+
+		if (type === TYPE.last_scene) goBack();
 	};
 
 	const onCurrentTime = ({ currentTime, duration }) => {

@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { usePlayer, useSceneManager, useScenes } from '../../contexts/SceneManager';
 import { Controls } from '../';
-import { playPause } from '../../utils';
 import clsx from 'clsx';
 
 const options = {
@@ -68,7 +67,7 @@ export const Player = (props) => {
 					<source key={source.src} {...source} />
 				))}
 			</video>
-			<Controls isActive={!hiddenTransition && !hiddenControls && userActive} paused={paused} />
+			<Controls isActive={userActive} paused={paused} hidden={hiddenControls || hiddenTransition} />
 		</article>
 	);
 };

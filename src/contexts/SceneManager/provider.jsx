@@ -8,7 +8,6 @@ import { useReducer, useState, useRef } from 'react';
 
 // TODO: Reordenar componentes del contexto
 // TODO: Subir Videos e Imáges a una CDN
-// TODO: Desplegar App en un hosting
 export const SceneManagerProvider = (props) => {
 	const { children, fullscreen, isMobile, sceneInit } = props;
 	const videoRef = useRef(null);
