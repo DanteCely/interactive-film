@@ -13,7 +13,7 @@
       "type": "first_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/escena_1.mp4",
+					"src": "https://film-interactive.b-cdn.net/escena_1.mp4",
 					"type": "video/mp4"
 				}
 			],
@@ -26,7 +26,7 @@
       "type": "scene",
 			"sources": [
 				{
-					"src": "/assets/videos/escena_2.mp4",
+					"src": "https://film-interactive.b-cdn.net/escena_2.mp4",
 					"type": "video/mp4"
 				}
 			],
@@ -40,7 +40,7 @@
       "type": "last_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/escena_3.mp4",
+					"src": "https://film-interactive.b-cdn.net/escena_3.mp4",
 					"type": "video/mp4"
 				}
 			],
@@ -51,7 +51,7 @@
       "type": "last_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/escena_4.mp4",
+					"src": "https://film-interactive.b-cdn.net/escena_4.mp4",
 					"type": "video/mp4"
 				}
 			],
@@ -62,7 +62,7 @@
       "type": "last_scene",
 			"sources": [
 				{
-					"src": "/assets/videos/escena_5.mp4",
+					"src": "https://film-interactive.b-cdn.net/escena_5.mp4",
 					"type": "video/mp4"
 				}
 			],
